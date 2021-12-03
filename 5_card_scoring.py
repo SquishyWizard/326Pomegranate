@@ -10,68 +10,6 @@ def scoring(p1_cards, p2_cards):
     and adjusted in value based on several conditional statements
     """
     
-    #counter variables for flush scenario
-    p1_club_ctr = 0
-    p1_heart_ctr = 0
-    p1_spade_ctr = 0
-    p1_diamond_ctr = 0
-    p2_club_ctr = 0
-    p2_heart_ctr = 0
-    p2_spade_ctr = 0
-    p2_diamond_ctr = 0
-    
-    for card in p1_cards:
-        if (len(card) == 3):
-            if (card[2] == "C"):
-                p1_club_ctr += 1
-            elif (card[2] == "H"):
-                p1_heart_ctr += 1
-            elif (card[2] == "S"):
-                p1_spade_ctr += 1
-            else:
-                p1_diamond_ctr += 1
-        else:
-            if (card[1] == "C"):
-                p1_club_ctr += 1
-            elif (card[1] == "H"):
-                p1_heart_ctr += 1
-            elif (card[1] == "S"):
-                p1_spade_ctr += 1
-            else:
-                p1_diamond_ctr += 1
-    for card in p2_cards:
-        if (len(card) == 3):
-            if (card[2] == "C"):
-                p2_club_ctr += 1
-            elif (card[2] == "H"):
-                p2_heart_ctr += 1
-            elif (card[2] == "S"):
-                p2_spade_ctr += 1
-            else:
-                p2_diamond_ctr += 1
-        else:
-            if (card[1] == "C"):
-                p2_club_ctr += 1
-            elif (card[1] == "H"):
-                p2_heart_ctr += 1
-            elif (card[1] == "S"):
-                p2_spade_ctr += 1
-            else:
-                p2_diamond_ctr += 1
-    
-    #Checks if player or opponent won via flush
-    if (p1_club_ctr == 5 or p1_diamond_ctr == 5
-        or p1_heart_ctr == 5 or p1_spade_ctr == 5):
-        if (p2_club_ctr == 5 or p2_diamond_ctr == 5
-            or p2_heart_ctr == 5 or p2_spade_ctr == 5):
-            print("The match is a draw")
-        else:
-            print("Player wins")
-    else:
-        if (p2_club_ctr == 5 or p2_diamond_ctr == 5
-            or p2_heart_ctr == 5 or p2_spade_ctr == 5):
-            print("Opponent wins")
-    
     p1_num_aces = 0
     p1_num_2s = 0
     p1_num_3s = 0
@@ -221,3 +159,22 @@ def scoring(p1_cards, p2_cards):
         or p2_num_10s == 5 or p2_num_jacks == 5 
         or p2_num_queens == 5 or p2_num_kings == 5):
             p2_has_5ofakind = True
+            
+def hasflush(cards):
+    """ Checks to see if this hand contains a flush
+    
+    Args:
+        cards(list of str): the player's hand
+    
+    Returns:
+        flush: boolean stating whether this player has flush
+    """
+    #counter variables for flush scenario
+    p1_club_ctr = 0
+    p1_heart_ctr = 0
+    p1_spade_ctr = 0
+    p1_diamond_ctr = 0
+    
+    for card in cards:
+        number, suite = cards[card].split()
+        

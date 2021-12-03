@@ -71,21 +71,24 @@ print("Your Hand:")
 for card in your_hand:
     print(card, end = " ")
 print("\n")
+#takes player cards out of the dealer's hand
 dealers_hand = dealers_hand[5:]
-
-#loop to stop the turns when game is over
-# while True:
-#     pass
-
 
 def turn():
     choice = (input("Swap Cards? (1 for yes, 2 for no)"))
     if choice == 2:
-        callRaiseFold(pot = 0, current_bet = 0)
+        pass
+        #calls method to replace cards
+        #cs.draw(player = 0, deck = 0, cards = 0))
+        #callRaiseFold(pot = 0, current_bet = 0)
     else:
-        callRaiseFold(pot = 0, current_bet= 0)
-    
-    
-    
+        pass
+        #callRaiseFold(pot = 0, current_bet= 0)
+ 
+    #call scoring to find the final score
 
-#callRaiseFold(pot, current_bet)
+
+#main function
+#loop to stop the turns when game is over
+# while gameState = True:
+#     turn()

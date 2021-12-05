@@ -39,7 +39,7 @@ class Player():
     
     
     
-def callRaiseFold(pot, current_bet):
+def callRaiseFold(self, pot, current_bet):
     action = input("\nCall (1), Raise (2), or Fold (3)? ")
     if action == "1":
         print("1")
@@ -52,7 +52,7 @@ def callRaiseFold(pot, current_bet):
             callRaiseFold(pot,current_bet)
         else:
             current_bet = int(input("Enter Raised Bet: "))
-            #raise value errror if
+            # raise value errror if
             #   bet is lower than before
             #   not a number
             pot += current_bet
@@ -69,17 +69,20 @@ def callRaiseFold(pot, current_bet):
 print("\nLet's Play\n")
 
 random.shuffle(deck)
+
+#gives player 5 cards from the deck
 your_hand = dealers_hand[:5]
+#displays player's hand
 print("Your Hand:")
 for card in your_hand:
     print(card, end = " ")
 print("\n")
-#takes player cards out of the dealer's hand
+#takes player's cards out of the dealer's hand
 dealers_hand = dealers_hand[5:]
 
 def turn():
     choice = (input("Swap Cards? (1 for yes, 2 for no)"))
-    if choice == 2:
+    if choice == 1:
         pass
         #calls method to replace cards
         #cs.draw(player = 0, deck = 0, cards = 0))

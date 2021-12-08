@@ -3,105 +3,227 @@ import Scoring as sc
 import cardswap as cs
 
 #Creates and shuffles deck
-deck = ["AH","2H","3H","4H","5H","6H","7H","8H","9H","10H","JH","QH","KH",
-        "AS","2S","3S","4S","5S","6S","7S","8S","9S","10S","JS","QS","KS",
-        "AD","2D","3D","4D","5D","6D","7D","8D","9D","10D","JD","QD","KD",
-        "AC","2C","3C","4C","5C","6C","7C","8C","9C","10C","JC","QC","KC"]
-graveyard = []
-pot = 0
-# current_bet = 0
-dealers_hand = deck
+deck = ["AH","2H","3H","4H","5H","6H","7H","8H","9H","TH","JH","QH","KH",
+        "AS","2S","3S","4S","5S","6S","7S","8S","9S","TS","JS","QS","KS",
+        "AD","2D","3D","4D","5D","6D","7D","8D","9D","TD","JD","QD","KD",
+        "AC","2C","3C","4C","5C","6C","7C","8C","9C","TC","JC","QC","KC"]
+deckstate = deck.copy()
 
 
 class Player():
-    def __init__(self, name, hand):
-        self.name = name
+    def __init__(self, hand):
         self.hand = hand
-  
-        
-#current_bet = int(input("Enter Starting Bet: "))
-    #raise value errror if negative or not a number
-# pot += int(current_bet)
+
+    def draw(self, deck, cards):
+        need1 = False
+        need2 = False
+        need3 = False
+        need4 = False
+        need5 = False
+        if 5 in cards:
+            del self.hand[4]
+            need1 = True
+        if 4 in cards:
+            del self.hand[3]
+            need2 = True
+        if 3 in cards:
+            del self.hand[2]
+            need3 = True
+        if 2 in cards:
+            del self.hand[1]
+            need4 = True
+        if 1 in cards:
+            del self.hand[0]
+            need5 = True
+        if need1:
+            self.hand[0] = random.choice(list(deck.values()))
+            deck.remove(self.hand[0])
+        if need2:
+            self.hand[1] = random.choice(list(deck.values()))
+            deck.remove(self.hand[1])
+        if need3:
+            self.hand[2] = random.choice(list(deck.values()))
+            deck.remove(self.hand[2])
+        if need4:
+            self.hand[3] = random.choice(list(deck.values()))
+            deck.remove(self.hand[3])
+        if need5:
+            self.hand[4] = random.choice(list(deck.values()))
+            deck.remove(self.hand[4])
 
 
-# -- TO PRINT OTHER HAND --
-# print("\nOpponenet's Hand:")
-# opponent_hand = dealers_hand[:5]
-# for card in opponent_hand:
-#     print(card, end = " ")
-
-
-# -- TO PRINT  REMAINING CARDS --
-# dealers_hand = dealers_hand[5:]
-# print("\nDealer's Hand:")
-# for card in dealers_hand:
-#     print(card, end = " ")
-    
-    
-    
-def callRaiseFold(self, pot, current_bet):
-    action = input("\nCall (1), Raise (2), or Fold (3)? ")
-    if action == "1":
-        print("1")
-        pot += current_bet
-
-    if action == "2":
-        raised = int(input("Enter Raised Bet: "))
-        if raised < current_bet:
-            print("New bet is not higher than previous bet.")
-            callRaiseFold(pot,current_bet)
-        else:
-            current_bet = int(input("Enter Raised Bet: "))
-            # raise value errror if
-            #   bet is lower than before
-            #   not a number
-            pot += current_bet
-        
-    if action == "3":
-        print("You Lose!")
-        #gameState = False
-        #discard player's hand into graveyard
-        
-    # -- TO PRINT GRAVEYARD --
-    # for card in graveyard:
-    #     print(card, end = " ")
-
-
-def turn():
-    choice = (input("Swap Cards? (1 for yes, 2 for no)"))
+def turn(player1, computer, deck):
+    choice = int(input("Swap Cards? (1 for yes, 2 for no)"))
     if choice == 1:
-        pass
-        #calls method to replace cards
-        #cs.draw(player = 0, deck = 0, cards = 0))
-        #callRaiseFold(pot = 0, current_bet = 0)
+        cards = input("Which Cards? (List card numbers separated by a comma)")
+        cardlist = [int(i) for i in cards.split(',')]
+        player1.draw(deck, cardlist)
+    l = [1, 2, 3, 4, 5]
+    compcards = random.sample(l, (random.choice(l)))
+    compcardlist = [int(j) for j in compcards]
+    return
+
+        
+def haspair(cards):
+    cardnums = [i[0] for i in cards]
+    for num in cardnums:
+        if cardnums.count(num) == 2:
+            return True
+    return False     
+
+def hastwopair(cards):
+    has1 = False
+    cardnums = [i[0] for i in cards]
+    for num in cardnums:
+        if cardnums.count(num) == 2 and has1 == False:
+            has1 = True
+            cardnums.remove(num)
+        if cardnums.count(num) == 2 and has1 == True:
+            return True
+    return False
+
+def has3ofakind(cards):
+    cardnums = [i[0] for i in cards]
+    for num in cardnums:
+        if cardnums.count(num) == 3:
+            return True
+    return False
+        
+def hasstraight(cards):
+    inside = False
+    count = 0
+    cardvals = list()
+    cardnums = [i[0] for i in cards]
+    for num in cardnums:
+        if num == "K":
+            cardvals.append(13)
+            continue
+        if num == "Q":
+            cardvals.append(12)
+            continue
+        if num == "J":
+            cardvals.append(11)
+            continue
+        if num == "T":
+            cardvals.append(10)
+            continue
+        if num == "A":
+            pass
+        else:
+            cardvals.append(int(num))
+    high = max(cardvals)
+    low = min(cardvals)
+    for num in cardvals:
+        if num >= low and num <= high:
+            count += 1
+        if count == 5:
+            inside = True
+            break
+    if inside and (high - low == 4):
+        return True
     else:
-        pass
-        #callRaiseFold(pot = 0, current_bet= 0)
- 
-    #call scoring to find the final score
+        return False
+    
+def hasflush(cards):
+    clubs = 0
+    hearts = 0
+    diamonds = 0
+    spades = 0
+    for card in cards:
+        if card[1] == "C":
+            clubs += 1
+        if card[1] == "H":
+            hearts += 1
+        if card[1] == "D":
+            diamonds += 1
+        if card[1] == "S":
+            spades += 1
+    if clubs == 5 or hearts == 5 or diamonds == 5 or spades == 5:
+        return True
+    else:
+        return False        
+
+def hasfullhouse(cards):
+    has1 = False
+    cardnums = [i[0] for i in cards]
+    for num in cardnums:
+        if cardnums.count(num) >= 2 and has1 == False:
+            has1 = True
+            cardnums.remove(num)
+        if cardnums.count(num) >= 2 and has1 == True:
+            return True
+    return False    
+    
+def has4ofakind(cards):
+    cardnums = [i[0] for i in cards]
+    for num in cardnums:
+        if cardnums.count(num) == 4:
+            return True
+    return False
+    
+def hasstraightflush(cards):
+    if hasstraight(cards) and hasflush(cards):
+        return True
+    else:
+        return False
+
+def checkhand(hand):
+    if hasstraightflush(hand):
+        return 9
+    if has4ofakind(hand):
+        return 8
+    if hasfullhouse(hand):
+        return 7
+    if hasflush(hand):
+        return 6
+    if hasstraight(hand):
+        return 5
+    if has3ofakind(hand):
+        return 4
+    if hastwopair(hand):
+        return 3
+    if haspair(hand):
+        return 2
+    else:
+        return 1
 
 
-#MIAN FUNCTION
-#loop to stop the turns when game is over
-# while gameState = True:
-#     turn()
+def main():
+    print("\nLet's Play\n")
+    random.shuffle(deckstate)
+    p1hand = deckstate[-5:]
+    deckstate.pop()
+    deckstate.pop()
+    deckstate.pop()
+    deckstate.pop()
+    deckstate.pop()
+    computerhand = deckstate[-5:]
+    deckstate.pop()
+    deckstate.pop()
+    deckstate.pop()
+    deckstate.pop()
+    deckstate.pop()
+    p1 = Player(p1hand)
+    computer = Player(computerhand)
+    print(f"Your Hand: {p1.hand}")
+
+    turn(p1, computer, deckstate)
+    print("Your Hand:")
+    for card in p1.hand:
+        print(f"{card}")
+    print("The Computer's Hand:")
+    for card in computer.hand:
+        print(f"{card}")
+    p1_handstrength = checkhand(p1.hand)
+    comp_handstrength = checkhand(computer.hand)
+    if p1_handstrength > comp_handstrength:
+        print("You win!")
+    elif comp_handstrength > p1_handstrength:
+        print("You lose :(")
+    else:
+        """tiebreak"""
+        print("tie")
 
 
-print("\nLet's Play\n")
-
-random.shuffle(deck)
-
-#gives player 5 cards from the deck
-your_hand = dealers_hand[:5]
-#displays player's hand
-print("Your Hand:")
-for card in your_hand:
-    print(card, end = " ")
-print("\n")
-#takes player's cards out of the dealer's hand
-dealers_hand = dealers_hand[5:]
-
-# goodbye
-# OR
-# ask to play again
-# recursive to beginning
+if __name__ == "__main__":
+    main()

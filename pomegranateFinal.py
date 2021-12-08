@@ -21,34 +21,29 @@ class Player():
         need4 = False
         need5 = False
         if 5 in cards:
-            del self.hand[4]
-            need1 = True
+            need5 = True
         if 4 in cards:
-            del self.hand[3]
-            need2 = True
+            need4 = True
         if 3 in cards:
-            del self.hand[2]
             need3 = True
         if 2 in cards:
-            del self.hand[1]
-            need4 = True
+            need2 = True
         if 1 in cards:
-            del self.hand[0]
-            need5 = True
+            need1 = True
         if need1:
-            self.hand[0] = random.choice(list(deck.values()))
+            self.hand[0] = random.choice(list(deck))
             deck.remove(self.hand[0])
         if need2:
-            self.hand[1] = random.choice(list(deck.values()))
+            self.hand[1] = random.choice(list(deck))
             deck.remove(self.hand[1])
         if need3:
-            self.hand[2] = random.choice(list(deck.values()))
+            self.hand[2] = random.choice(list(deck))
             deck.remove(self.hand[2])
         if need4:
-            self.hand[3] = random.choice(list(deck.values()))
+            self.hand[3] = random.choice(list(deck))
             deck.remove(self.hand[3])
         if need5:
-            self.hand[4] = random.choice(list(deck.values()))
+            self.hand[4] = random.choice(list(deck))
             deck.remove(self.hand[4])
 
 
@@ -206,7 +201,6 @@ def main():
     p1 = Player(p1hand)
     computer = Player(computerhand)
     print(f"Your Hand: {p1.hand}")
-
     turn(p1, computer, deckstate)
     print("Your Hand:")
     for card in p1.hand:

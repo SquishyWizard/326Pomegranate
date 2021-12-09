@@ -1,6 +1,4 @@
 import random
-import Scoring as sc
-import cardswap as cs
 
 #Creates and shuffles deck
 deck = ["AH","2H","3H","4H","5H","6H","7H","8H","9H","TH","JH","QH","KH",
@@ -182,6 +180,44 @@ def checkhand(hand):
     else:
         return 1
 
+def tiebreaker(p1_hand, p2_hand):
+    p1_hand_count = 0
+    p2_hand_count = 0
+    
+    for card in p1_hand:
+        value = card[0]
+        if value == "A":
+            p1_hand_count = p1_hand_count + 1
+        elif value == "T":
+            p1_hand_count = p1_hand_count + 10
+        elif value == "J":
+            p1_hand_count = p1_hand_count + 11
+        elif value == "Q":
+            p1_hand_count = p1_hand_count + 12
+        elif value == "K":
+            p1_hand_count = p1_hand_count + 13
+        else:
+            p1_hand_count + p1_hand_count + int(value)
+    for card in p2_hand:
+        value = card[0]
+        if value == "A":
+            p2_hand_count = p2_hand_count + 1
+        elif value == "T":
+            p2_hand_count = p2_hand_count + 10
+        elif value == "J":
+            p2_hand_count = p2_hand_count + 11
+        elif value == "Q":
+            p2_hand_count = p2_hand_count + 12
+        elif value == "K":
+            p2_hand_count = p2_hand_count + 13
+        else:
+            p2_hand_count + p2_hand_count + int(value)
+    if p1_hand_count > p2_hand_count:
+        print("You win!")
+    else:
+        print("You lose :(")
+    
+     
 
 def main():
     print("\nLet's Play\n")
@@ -215,8 +251,7 @@ def main():
     elif comp_handstrength > p1_handstrength:
         print("You lose :(")
     else:
-        """tiebreak"""
-        print("tie")
+        tiebreaker(p1.hand, computer.hand)
 
 
 if __name__ == "__main__":

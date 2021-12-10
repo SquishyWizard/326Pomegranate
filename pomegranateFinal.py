@@ -9,10 +9,19 @@ deckstate = deck.copy()
 
 
 class Player():
+    """
+    Attributes:
+        hand - the given player's hand of cards
+    """
     def __init__(self, hand):
         self.hand = hand
 
     def draw(self, deck, cards):
+        """
+        Args:
+            deck - the current deck of cards
+            cards - player's hand of cards
+        """
         need1 = False
         need2 = False
         need3 = False
@@ -46,6 +55,12 @@ class Player():
 
 
 def turn(player1, computer, deck):
+    """
+    Args:
+        player1 - the human player
+        computer - the computer player
+        deck - the currect deck
+    """
     choice = int(input("Swap Cards? (1 for yes, 2 for no)"))
     if choice == 1:
         cards = input("Which Cards? (List card numbers separated by a comma)")
@@ -58,6 +73,10 @@ def turn(player1, computer, deck):
 
         
 def haspair(cards):
+    """
+    Args:
+        cards - player's hand of cards
+    """
     cardnums = [i[0] for i in cards]
     for num in cardnums:
         if cardnums.count(num) == 2:
@@ -65,6 +84,10 @@ def haspair(cards):
     return False     
 
 def hastwopair(cards):
+    """
+    Args:
+        cards - player's hand of cards
+    """
     has1 = False
     cardnums = [i[0] for i in cards]
     for num in cardnums:
@@ -76,6 +99,10 @@ def hastwopair(cards):
     return False
 
 def has3ofakind(cards):
+    """
+    Args:
+        cards - player's hand of cards
+    """
     cardnums = [i[0] for i in cards]
     for num in cardnums:
         if cardnums.count(num) == 3:
@@ -83,6 +110,10 @@ def has3ofakind(cards):
     return False
         
 def hasstraight(cards):
+    """
+    Args:
+        cards - player's hand of cards
+    """
     inside = False
     count = 0
     cardvals = list()
@@ -118,6 +149,10 @@ def hasstraight(cards):
         return False
     
 def hasflush(cards):
+    """
+    Args:
+        cards - player's hand of cards
+    """
     clubs = 0
     hearts = 0
     diamonds = 0
@@ -137,6 +172,10 @@ def hasflush(cards):
         return False        
 
 def hasfullhouse(cards):
+    """
+    Args:
+        cards - player's hand of cards
+    """
     has1 = False
     cardnums = [i[0] for i in cards]
     for num in cardnums:
@@ -148,6 +187,10 @@ def hasfullhouse(cards):
     return False    
     
 def has4ofakind(cards):
+    """
+    Args:
+        cards - player's hand of cards
+    """
     cardnums = [i[0] for i in cards]
     for num in cardnums:
         if cardnums.count(num) == 4:
@@ -155,32 +198,45 @@ def has4ofakind(cards):
     return False
     
 def hasstraightflush(cards):
+    """
+    Args:
+        cards - player's hand of cards
+    """
     if hasstraight(cards) and hasflush(cards):
         return True
     else:
         return False
 
 def checkhand(hand):
+    """
+    Args:
+        hand - player's hand of cards
+    """
     if hasstraightflush(hand):
         return 9
-    if has4ofakind(hand):
+    elif has4ofakind(hand):
         return 8
-    if hasfullhouse(hand):
+    elif hasfullhouse(hand):
         return 7
-    if hasflush(hand):
+    elif hasflush(hand):
         return 6
-    if hasstraight(hand):
+    elif hasstraight(hand):
         return 5
-    if has3ofakind(hand):
+    elif has3ofakind(hand):
         return 4
-    if hastwopair(hand):
+    elif hastwopair(hand):
         return 3
-    if haspair(hand):
+    elif haspair(hand):
         return 2
     else:
         return 1
 
 def tiebreaker(p1_hand, p2_hand):
+    """
+    Args:
+        p1_hand - first player's hand of cards
+        p1_hand - second player's hand of cards
+    """
     p1_hand_count = 0
     p2_hand_count = 0
     

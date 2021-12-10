@@ -187,7 +187,7 @@ def tiebreaker(p1_hand, p2_hand):
     for card in p1_hand:
         value = card[0]
         if value == "A":
-            p1_hand_count = p1_hand_count + 1
+            p1_hand_count = p1_hand_count + 14
         elif value == "T":
             p1_hand_count = p1_hand_count + 10
         elif value == "J":
@@ -201,7 +201,7 @@ def tiebreaker(p1_hand, p2_hand):
     for card in p2_hand:
         value = card[0]
         if value == "A":
-            p2_hand_count = p2_hand_count + 1
+            p2_hand_count = p2_hand_count + 14
         elif value == "T":
             p2_hand_count = p2_hand_count + 10
         elif value == "J":

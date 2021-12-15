@@ -336,7 +336,7 @@ def tiebreaker(p1_hand, p2_hand):
                 return
 
 def removedealt(deckstate):
-    """Removes cards from the deck as they are being drawn
+    """Removes cards from the deck as they are being dealt
     
     Args:
         deckstate - list of cards in the deck
@@ -344,7 +344,7 @@ def removedealt(deckstate):
     i = 0
     while i < 5:
         deckstate.pop()
-        i+=1
+        i += 1
 
 def main():
     print("\nLet's Play\n")

@@ -276,7 +276,6 @@ def main():
     removedealt(deckstate)
     computerhand = deckstate[-5:]
     removedealt(deckstate)
-    print(deckstate)
     p1 = Player(p1hand)
     computer = Player(computerhand)
     print(f"Your Hand: {p1.hand}")

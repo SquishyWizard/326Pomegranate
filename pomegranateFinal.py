@@ -260,8 +260,10 @@ def tiebreaker(p1_hand, p2_hand):
             p2_hand_count = p2_hand_count + value
     if p1_hand_count > p2_hand_count:
         print("You win!")
-    else:
+    elif p2_hand_count > p1_hand_count:
         print("You lose :(")
+    else:
+        print("Tie!")
 
 def removedealt(deckstate):
     i = 0

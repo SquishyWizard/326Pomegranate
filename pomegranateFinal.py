@@ -285,6 +285,14 @@ def checkhand(hand):
         return 1
     
 def faceconvert(card):
+    """Converts Face cards to values
+    
+    Args:
+        card - a card in a player's hand
+    
+    Returns:
+        val - the value of the face card as an int
+    """
     if card == "A":
         val = 14
     elif card == "K":
@@ -300,7 +308,8 @@ def faceconvert(card):
     return val
  
 def tiebreaker(p1_hand, p2_hand):
-    """
+    """Determines the winner if both player's have same strength
+    
     Args:
         p1_hand - first player's hand of cards
         p1_hand - second player's hand of cards
@@ -327,6 +336,11 @@ def tiebreaker(p1_hand, p2_hand):
                 return
 
 def removedealt(deckstate):
+    """Removes cards from the deck as they are being drawn
+    
+    Args:
+        deckstate - list of cards in the deck
+    """
     i = 0
     while i < 5:
         deckstate.pop()

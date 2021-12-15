@@ -1,6 +1,4 @@
 import random
-import Scoring as sc
-import cardswap as cs
 
 #Creates and shuffles deck
 deck = ["AH","2H","3H","4H","5H","6H","7H","8H","9H","TH","JH","QH","KH",
@@ -182,22 +180,20 @@ def checkhand(hand):
     else:
         return 1
 
+def removeShuffled(deckstate):
+    i = 0
+    while i < 5:
+        deckstate.pop()
+        i+=1
 
 def main():
     print("\nLet's Play\n")
     random.shuffle(deckstate)
     p1hand = deckstate[-5:]
-    deckstate.pop()
-    deckstate.pop()
-    deckstate.pop()
-    deckstate.pop()
-    deckstate.pop()
+    removeShuffled(deckstate)
     computerhand = deckstate[-5:]
-    deckstate.pop()
-    deckstate.pop()
-    deckstate.pop()
-    deckstate.pop()
-    deckstate.pop()
+    removeShuffled(deckstate)
+    print(deckstate)
     p1 = Player(p1hand)
     computer = Player(computerhand)
     print(f"Your Hand: {p1.hand}")

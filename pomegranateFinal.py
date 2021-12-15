@@ -372,7 +372,6 @@ def main():
         print("You lose :(")
     else:
         tiebreaker(p1.hand, computer.hand)
-        tiebreaker(p1hand, computerhand)
 
 
 if __name__ == "__main__":

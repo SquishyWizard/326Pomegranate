@@ -304,6 +304,10 @@ def tiebreaker(p1_hand, p2_hand):
     """
     if has4ofakind(p1_hand) or has3ofakind(p1_hand) or hasfullhouse(p1_hand)\
         or hastwopair(p1_hand) or haspair(p1_hand):
+            # Hands involving pairs, trips, and quads have to be 
+            # compared by highest groups downward. Two full houses
+            # for example are compared by higher trip, then higher
+            # pair, then high card.
             p1cardnums = [i[0] for i in p1_hand]
             compcardnums = [i[0] for i in p2_hand]
             high = max(set(p1cardnums), key = p1cardnums.count)
@@ -328,6 +332,9 @@ def tiebreaker(p1_hand, p2_hand):
     p2high = max(p2cardvals)
     if p1high == p2high:
         while p1high == p2high and len(p1cardvals) > 1:
+            # Goes down the line of cards until it finds a
+            # non-match. If all card ranks match, a tie is
+            # declared.
             p1cardvals.remove(max(p1cardvals))
             p2cardvals.remove(max(p2cardvals))
             p1high = max(p1cardvals)

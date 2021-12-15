@@ -325,14 +325,6 @@ def tiebreaker(p1_hand, p2_hand):
             elif highp1 < highcomp:
                 print("You lose :(")
                 return
-    
-     
-def removeShuffled(deckstate):
-    """Removes cards from the deckstate list
-    
-    Args:
-        deckstate - list of cards in the deck
-    """
 
 def removedealt(deckstate):
     i = 0
@@ -347,8 +339,7 @@ def main():
     p1hand = deckstate[-5:]
     removedealt(deckstate)
     computerhand = deckstate[-5:]
-    removeShuffled(deckstate)
-    print(deckstate)
+    removedealt(deckstate)
     
     removedealt(deckstate)
     p1 = Player(p1hand)

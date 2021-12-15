@@ -245,7 +245,7 @@ def tiebreaker(p1_hand, p2_hand):
     else:
         print("You lose :(")
 
-def removeShuffled(deckstate):
+def removedealt(deckstate):
     i = 0
     while i < 5:
         deckstate.pop()
@@ -255,9 +255,9 @@ def main():
     print("\nLet's Play\n")
     random.shuffle(deckstate)
     p1hand = deckstate[-5:]
-    removeShuffled(deckstate)
+    removedealt(deckstate)
     computerhand = deckstate[-5:]
-    removeShuffled(deckstate)
+    removedealt(deckstate)
     print(deckstate)
     p1 = Player(p1hand)
     computer = Player(computerhand)

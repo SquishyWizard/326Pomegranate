@@ -212,8 +212,8 @@ def tiebreaker(p1_hand, p2_hand):
             compcardnums = [i[0] for i in p2_hand]
             high = max(set(p1cardnums), key = p1cardnums.count)
             comphigh = max(set(compcardnums), key = compcardnums.count)
-            highp1 = faceconvert(high)
-            highcomp = faceconvert(comphigh)
+            highp1 = int(faceconvert(high))
+            highcomp = int(faceconvert(comphigh))
             if highp1 > highcomp:
                 print("You win!")
                 return

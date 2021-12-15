@@ -364,10 +364,10 @@ def main():
     
     print("Your Hand:")
     for card in p1.hand:
-        print(f"{card}")
+        print(card)
     print("The Computer's Hand:")
     for card in computer.hand:
-        print(f"{card}")
+        print(card)
     
     p1_handstrength = checkhand(p1.hand)
     comp_handstrength = checkhand(computer.hand)

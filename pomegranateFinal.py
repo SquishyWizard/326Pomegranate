@@ -180,6 +180,21 @@ def checkhand(hand):
     else:
         return 1
 
+def faceconvert(card):
+    if card == "A":
+        val = 14
+    elif card == "K":
+        val = 13
+    elif card == "Q":
+        val = 12
+    elif card == "J":
+        val = 11
+    elif card == "T":
+        val = 10
+    else:
+        val = card
+    return val
+ 
 def tiebreaker(p1_hand, p2_hand):
     """
     Args:
@@ -196,10 +211,13 @@ def tiebreaker(p1_hand, p2_hand):
             p1cardnums = [i[0] for i in p1_hand]
             compcardnums = [i[0] for i in p2_hand]
             high = max(set(p1cardnums), key = p1cardnums.count)
-            if high > max(set(compcardnums), key = compcardnums.count):
+            comphigh = max(set(compcardnums), key = compcardnums.count)
+            highp1 = faceconvert(high)
+            highcomp = faceconvert(comphigh)
+            if highp1 > highcomp:
                 print("You win!")
                 return
-            elif high < max(set(compcardnums), key = compcardnums.count):
+            elif highp1 < highcomp:
                 print("You lose :(")
                 return
     for card in p1_hand:

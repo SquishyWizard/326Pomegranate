@@ -146,22 +146,10 @@ def hasstraight(cards):
     cardvals = list()
     cardnums = [i[0] for i in cards]
     for num in cardnums:
-        if num == "K":
-            cardvals.append(13)
-            continue
-        if num == "Q":
-            cardvals.append(12)
-            continue
-        if num == "J":
-            cardvals.append(11)
-            continue
-        if num == "T":
-            cardvals.append(10)
-            continue
-        if num == "A":
-            pass
-        else:
-            cardvals.append(int(num))
+        cardvals.append(int(faceconvert(num)))
+    if 14 in cardvals and 2 in cardvals and 3 in cardvals and 4 in cardvals\
+    and 5 in cardvals:
+        return True
     high = max(cardvals)
     low = min(cardvals)
     for num in cardvals:
@@ -314,12 +302,6 @@ def tiebreaker(p1_hand, p2_hand):
         p1_hand - first player's hand of cards
         p1_hand - second player's hand of cards
     """
-    p1_hand_count = 0
-    p2_hand_count = 0
-    
-    p1high = False
-    p2high = False
-    
     if has4ofakind(p1_hand) or has3ofakind(p1_hand) or hasfullhouse(p1_hand)\
         or hastwopair(p1_hand) or haspair(p1_hand):
             p1cardnums = [i[0] for i in p1_hand]
@@ -334,6 +316,28 @@ def tiebreaker(p1_hand, p2_hand):
             elif highp1 < highcomp:
                 print("You lose :(")
                 return
+    p1cardvals = list()
+    p1cardnums = [i[0] for i in p1_hand]
+    for num in p1cardnums:
+        p1cardvals.append(int(faceconvert(num)))
+    p1high = max(p1cardvals)
+    p2cardvals = list()
+    p2cardnums = [i[0] for i in p2_hand]
+    for num in p2cardnums:
+        p2cardvals.append(int(faceconvert(num)))
+    p2high = max(p2cardvals)
+    if p1high == p2high:
+        while p1high == p2high and len(p1cardvals) > 1:
+            p1cardvals.remove(max(p1cardvals))
+            p2cardvals.remove(max(p2cardvals))
+            p1high = max(p1cardvals)
+            p2high = max(p2cardvals)
+    if p1high > p2high:
+        print("You win!")
+    elif p2high > p1high:
+        print("You lose :(")
+    else:
+        print("Tie!")
 
 def removedealt(deckstate):
     """Removes cards from the deck as they are being dealt

@@ -9,7 +9,8 @@ deckstate = deck.copy()
 
 
 class Player():
-    """
+    """Class describing the player
+    
     Attributes:
         hand - the given player's hand of cards
     """
@@ -17,10 +18,15 @@ class Player():
         self.hand = hand
 
     def draw(self, deck, cards):
-        """
+        """Adds 1-5 cards to a player's hand
+        
         Args:
             deck - the current deck of cards
             cards - player's hand of cards
+        
+        Side effects:
+            Removes items from the list "deck"
+            Adds new items to the hand attribute
         """
         need1 = False
         need2 = False
@@ -55,7 +61,8 @@ class Player():
 
 
 def turn(player1, computer, deck):
-    """
+    """Represents the player's turn in the game
+    
     Args:
         player1 - the human player
         computer - the computer player
@@ -73,9 +80,14 @@ def turn(player1, computer, deck):
 
         
 def haspair(cards):
-    """
+    """Checks to see if player has a pair
+    
     Args:
         cards - player's hand of cards
+    
+    Returns:
+        boolean - true if the player has a pair,
+            false if the player does not have a pair
     """
     cardnums = [i[0] for i in cards]
     for num in cardnums:
@@ -84,9 +96,14 @@ def haspair(cards):
     return False     
 
 def hastwopair(cards):
-    """
+    """Checks to see if player has a two-pair
+    
     Args:
         cards - player's hand of cards
+    
+    Returns:
+        boolean - true if the player has a two-pair,
+            false if the player does not have a two-pair
     """
     has1 = False
     cardnums = [i[0] for i in cards]
@@ -99,9 +116,14 @@ def hastwopair(cards):
     return False
 
 def has3ofakind(cards):
-    """
+    """Checks to see if player has a 3 of a kind
+    
     Args:
         cards - player's hand of cards
+    
+    Returns:
+        boolean - true if the player has a 3 of a kind,
+            false if the player does not have a 3 of a kind
     """
     cardnums = [i[0] for i in cards]
     for num in cardnums:
@@ -110,9 +132,14 @@ def has3ofakind(cards):
     return False
         
 def hasstraight(cards):
-    """
+    """Checks to see if player has a straight
+    
     Args:
         cards - player's hand of cards
+    
+    Returns:
+        boolean - true if the player has a straight,
+            false if the player does not have a straight
     """
     inside = False
     count = 0
@@ -149,9 +176,14 @@ def hasstraight(cards):
         return False
     
 def hasflush(cards):
-    """
+    """Checks to see if player has a flush
+    
     Args:
         cards - player's hand of cards
+    
+    Returns:
+        boolean - true if the player has a flush,
+            false if the player does not have a flush
     """
     clubs = 0
     hearts = 0
@@ -172,9 +204,14 @@ def hasflush(cards):
         return False        
 
 def hasfullhouse(cards):
-    """
+    """Checks to see if player has a full house
+    
     Args:
         cards - player's hand of cards
+    
+    Returns:
+        boolean - true if the player has a full house,
+            false if the player does not have a full house
     """
     has1 = False
     cardnums = [i[0] for i in cards]
@@ -187,9 +224,14 @@ def hasfullhouse(cards):
     return False    
     
 def has4ofakind(cards):
-    """
+    """Checks to see if player has a 4 of a kind
+    
     Args:
         cards - player's hand of cards
+    
+    Returns:
+        boolean - true if the player has a 4 of a kind,
+            false if the player does not have a 4 of a kind
     """
     cardnums = [i[0] for i in cards]
     for num in cardnums:
@@ -198,9 +240,14 @@ def has4ofakind(cards):
     return False
     
 def hasstraightflush(cards):
-    """
+    """Checks to see if player has a straight-flush
+    
     Args:
         cards - player's hand of cards
+    
+    Returns:
+        boolean - true if the player has a straight-flush,
+            false if the player does not have a straight-flush
     """
     if hasstraight(cards) and hasflush(cards):
         return True
@@ -208,9 +255,15 @@ def hasstraightflush(cards):
         return False
 
 def checkhand(hand):
-    """
+    """Reviews the player's hand to see what kind of a hand
+    they have
+    
     Args:
         hand - player's hand of cards
+    
+    Returns:
+        int - number representing the strength of their hand
+            (will be 1-9)
     """
     if hasstraightflush(hand):
         return 9
@@ -231,9 +284,9 @@ def checkhand(hand):
     else:
         return 1
 
-<<<<<<< HEAD
 def tiebreaker(p1_hand, p2_hand):
-    """
+    """Determines winner if both players have same hand strength
+    
     Args:
         p1_hand - first player's hand of cards
         p1_hand - second player's hand of cards
@@ -275,32 +328,40 @@ def tiebreaker(p1_hand, p2_hand):
         print("You lose :(")
     
      
-=======
 def removeShuffled(deckstate):
+    """Removes cards from the deckstate list
+    
+    Args:
+        deckstate - list of cards in the deck
+    """
     i = 0
     while i < 5:
         deckstate.pop()
         i+=1
->>>>>>> a238db316dcff81639104b0247ba24ff32e188d1
 
 def main():
     print("\nLet's Play\n")
+    
     random.shuffle(deckstate)
     p1hand = deckstate[-5:]
     removeShuffled(deckstate)
     computerhand = deckstate[-5:]
     removeShuffled(deckstate)
     print(deckstate)
+    
     p1 = Player(p1hand)
     computer = Player(computerhand)
+    
     print(f"Your Hand: {p1.hand}")
     turn(p1, computer, deckstate)
+    
     print("Your Hand:")
     for card in p1.hand:
         print(f"{card}")
     print("The Computer's Hand:")
     for card in computer.hand:
         print(f"{card}")
+    
     p1_handstrength = checkhand(p1.hand)
     comp_handstrength = checkhand(computer.hand)
     if p1_handstrength > comp_handstrength:

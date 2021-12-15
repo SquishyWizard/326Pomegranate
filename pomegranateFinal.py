@@ -170,7 +170,7 @@ def hasstraight(cards):
         if count == 5:
             inside = True
             break
-    if inside and (high - low == 4):
+    if inside and (high - low == 4) and not haspair(cards):
         return True
     else:
         return False

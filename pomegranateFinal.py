@@ -83,6 +83,10 @@ def has3ofakind(cards):
     return False
         
 def hasstraight(cards):
+    """
+    Args:
+        cards - player's hand of cards
+    """
     inside = False
     count = 0
     cardvals = list()
@@ -101,9 +105,12 @@ def hasstraight(cards):
             cardvals.append(10)
             continue
         if num == "A":
-            pass
+            cardvals.append(14)
         else:
             cardvals.append(int(num))
+    if 14 in cardvals and 2 in cardvals and 3 in cardvals and 4 in cardvals\
+    and 5 in cardvals:
+        return True
     high = max(cardvals)
     low = min(cardvals)
     for num in cardvals:

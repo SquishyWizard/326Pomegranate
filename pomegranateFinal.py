@@ -180,6 +180,71 @@ def checkhand(hand):
     else:
         return 1
 
+def tiebreaker(p1_hand, p2_hand):
+    """
+    Args:
+        p1_hand - first player's hand of cards
+        p1_hand - second player's hand of cards
+    """
+    p1_hand_count = 0
+    p2_hand_count = 0
+    p1high = False
+    p2high = False
+    
+    if has4ofakind(p1_hand) or has3ofakind(p1_hand) or hasfullhouse(p1_hand)\
+        or hastwopair(p1_hand) or haspair(p1_hand):
+            p1cardnums = [i[0] for i in p1_hand]
+            compcardnums = [i[0] for i in p2_hand]
+            high = max(set(p1cardnums), key = p1cardnums.count)
+            if high > max(set(compcardnums), key = compcardnums.count):
+                print("You win!")
+                return
+            elif high < max(set(compcardnums), key = compcardnums.count):
+                print("You lose :(")
+                return
+    for card in p1_hand:
+        value = card[0]
+        if value == "A":
+            p1_hand_count = p1_hand_count + 14
+            p1high = True
+        elif value == "K" and p1high == False:
+            p1_hand_count = p1_hand_count + 13
+            p1high = True
+        elif value == "Q" and p1high == False:
+            p1_hand_count = p1_hand_count + 12
+            p1high = True
+        elif value == "J" and p1high == False:
+            p1_hand_count = p1_hand_count + 11
+            p1high = True
+        elif value == "T" and p1high == False:
+            p1_hand_count = p1_hand_count + 10
+            p1high = True
+        elif value is int:
+            p1_hand_count = p1_hand_count + value
+    for card in p2_hand:
+        value = card[0]
+        if value == "A":
+            p2_hand_count = p2_hand_count + 14
+            p2high = True
+        elif value == "K" and p2high == False:
+            p2_hand_count = p2_hand_count + 13
+            p2high = True
+        elif value == "Q" and p2high == False:
+            p2_hand_count = p2_hand_count + 12
+            p2high = True
+        elif value == "J" and p2high == False:
+            p2_hand_count = p2_hand_count + 11
+            p2high = True
+        elif value == "T" and p2high == False:
+            p2_hand_count = p2_hand_count + 10
+            p2high = True
+        elif value is int:
+            p2_hand_count = p2_hand_count + value
+    if p1_hand_count > p2_hand_count:
+        print("You win!")
+    else:
+        print("You lose :(")
+
 def removeShuffled(deckstate):
     i = 0
     while i < 5:
@@ -211,8 +276,7 @@ def main():
     elif comp_handstrength > p1_handstrength:
         print("You lose :(")
     else:
-        """tiebreak"""
-        print("tie")
+        tiebreaker(p1hand, computerhand)
 
 
 if __name__ == "__main__":

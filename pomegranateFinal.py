@@ -296,7 +296,7 @@ def faceconvert(card):
     return val
  
 def tiebreaker(p1_hand, p2_hand):
-    """Determines the winner if both player's hands are of the same strength
+    """Determines the winner if both players' hands are of the same strength
     
     Args:
         p1_hand - first player's hand of cards

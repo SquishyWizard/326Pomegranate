@@ -358,6 +358,12 @@ def removedealt(deckstate):
         i += 1
 
 def main():
+    """Main method that runs the poker game
+    
+    Side effects:
+    Deals player hands
+    Prompts user for input and prints to terminal
+    """
     print("\nLet's Play\n")
     
     random.shuffle(deckstate)

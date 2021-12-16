@@ -204,10 +204,11 @@ def hasfullhouse(cards):
     has1 = False
     cardnums = [i[0] for i in cards]
     for num in cardnums:
-        if cardnums.count(num) >= 2 and has1 == False:
+        if cardnums.count(num) == 2 and has1 == False:
             has1 = True
             cardnums.remove(num)
-        if cardnums.count(num) >= 2 and has1 == True:
+    for num in cardnums:
+        if cardnums.count(num) == 3 and has1 == True:
             return True
     return False    
     
@@ -307,7 +308,7 @@ def tiebreaker(p1_hand, p2_hand):
             # Hands involving pairs, trips, and quads have to be 
             # compared by highest groups downward. Two full houses
             # for example are compared by higher trip, then higher
-            # pair, then high card.
+            # pair.
             p1cardnums = [i[0] for i in p1_hand]
             compcardnums = [i[0] for i in p2_hand]
             high = max(set(p1cardnums), key = p1cardnums.count)
